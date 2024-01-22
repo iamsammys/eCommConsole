@@ -3,6 +3,7 @@
  * implements the base model for the ecomm console
  */
 const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 
 
 class baseClass {
@@ -10,7 +11,7 @@ class baseClass {
         if (new.target === baseClass) {
             throw new TypeError("Cannot construct baseClass instances directly");
         }
-        this.id = baseClass.generateId();
+        this.id = uuidv4();
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }

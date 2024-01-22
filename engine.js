@@ -15,7 +15,6 @@ class objStorage {
         }
         this.objects = objects;
         this.filename = fileName;
-        objStorage.load();
     }
 
     static new(obj) {
@@ -24,12 +23,14 @@ class objStorage {
     }
 
     static all(obj) {
+        if (obj === undefined) {
+            return objects;
+        }
         for (const key in objects) {
             if (key.startsWith(obj.constructor.name)) {
                 return objects[key];
             }
         }
-        return objects;
     }
 
     static delete(objId) {
@@ -53,24 +54,24 @@ class objStorage {
     static load() {
         try {
             const data = fs.readFileSync(fileName, 'utf8');
-            const objects = JSON.parse(data);
-            for (const functions in objects) {
-                for (const key in objects[functions]) {
-                    const obj = objects[functions][key];
-                    const className = obj['__class__'];
-                    const cls = require('./' + className.toLowerCase() + '.js');
-                    const inst = new cls();
-                    for (const attr in obj) {
-                        if (attr !== '__class__') {
-                            inst[attr] = obj[attr];
-                        }
-                    }
-                    objStorage.new(inst);
+            const loadedData = JSON.parse(data);
+    
+            for (const key in loadedData) {
+                const className = loadedData[key].__class__;
+                const cls = require('./' + className.toLowerCase() + '.js');
+                const instance = new cls();
+
+                for (const prop in loadedData[key]) {
+                    instance[prop] = loadedData[key][prop];
                 }
+    
+                objStorage.new(instance);
             }
+    
         } catch (err) {
-            return;
+            console.error("Error loading data:", err);
         }
-    }
+    }    
 }
+objStorage.load();
 module.exports = objStorage;

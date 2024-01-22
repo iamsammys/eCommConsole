@@ -49,8 +49,8 @@ function viewAllUsers() {
 
 function createProduct() {
   rl.question('Enter product details (name description price image): ', (input) => {
-    const [name, description, price, image] = input.split(' ');
-    const newProduct = new product(name, description, price, image);
+    const [name, category, price] = input.split(' ');
+    const newProduct = new product(name, category, price);
     newProduct.save();
     console.log('Product created successfully!');
     displayMenu();

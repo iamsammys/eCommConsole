@@ -6,10 +6,10 @@ const baseClass = require('./base.js');
 
 
 class product extends baseClass {
-    constructor(name, description, price, image) {
+    constructor(name, category, price) {
         super();
         this.name = name;
-        this.description = description;
+        this.category = category;
         this.price = price;
     }
 }

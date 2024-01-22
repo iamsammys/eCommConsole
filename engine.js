@@ -71,7 +71,7 @@ class objStorage {
             }
     
         } catch (err) {
-            console.error("Error loading data:", err);
+            return;
         }
     }    
 }

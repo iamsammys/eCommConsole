@@ -38,6 +38,7 @@ function createUser() {
 
 function viewAllUsers() {
   const allUsers = objStorage.all(user);
+  console.log(allUsers);
   console.log('\nAll Users:');
   for (const key in allUsers) {
     const currentUser = allUsers[key];

@@ -27,7 +27,7 @@ class objStorage {
             return objects;
         }
         for (const key in objects) {
-            if (key.startsWith(obj.constructor.name)) {
+            if (objects[key]['__class__'] === obj) {
                 return objects[key];
             }
         }

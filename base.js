@@ -2,34 +2,36 @@
 /**
  * implements the base model for the ecomm console
  */
-
+const objStorage = require('./engine');
 const fs = require('fs');
 
-class baseClass() {
+
+class baseClass {
     constructor() {
         if (new.target === baseClass) {
             throw new TypeError("Cannot construct baseClass instances directly");
         }
-        this.id = this.generateId();
+        this.id = baseClass.generateId();
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }
 
-    generateId() {
-        return this.newId? ++this.newId : this.newId = 1;
+    static generateId() {
+        return baseClass.lastId? ++baseClass.lastId : baseClass.lastId = 1;
     }
     
     toJson() {
-        json = {};
-        attrs = Object.getOwnPropertyNames(this);
+        const json = {};
+        const attrs = Object.getOwnPropertyNames(this);
         for (const attr of attrs) {
             json[attr] = this[attr];
         }
+        json['__class__'] = this.constructor.name;
         return json;
     }
 
     toDict() {
-        return toJson;
+        return this.toJson();
     }
 
     save() {
@@ -42,3 +44,4 @@ class baseClass() {
         objStorage.save();
     }
 }
+module.exports = baseClass;

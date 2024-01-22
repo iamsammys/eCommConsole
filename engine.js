@@ -5,47 +5,60 @@
  */
 
 const fs = require('fs');
+const objects = {};
+fileName = './database.json';
 
 class objStorage {
     constructor() {
-        if (new.target === objobjects) {
+        if (new.target === objStorage) {
             throw new TypeError("Cannot construct objobjects instances directly");
         }
-        this.objects = {};
-        this.filename = 'database.json';
+        this.objects = objects;
+        this.filename = fileName;
     }
 
     static new(obj) {
-        key = obj.constructor.name + '.' + obj.id;
-        this.objects[key] = obj;
+        const key = Object.constructor.name + 's' + obj.id;
+        objects[key] = obj;
     }
 
-    static all() {
-        return this.objects;
+    static all(obj) {
+        for (const key in objects) {
+            if (key.startsWith(obj.constructor.name)) {
+                return objects[key];
+            }
+        }
+        return objects;
     }
 
-    static get(id) {
-        key = obj.constructor.name + '.' + id;
-        return this.objects[key];
-    }
-
-    static delete(key) {
-        key = obj.constructor.name + '.' + id;
-        delete this.objects[key];
-        this.save();
+    static delete(objId) {
+        const key = Object.constructor.name + 's' + objId;
+        delete objects[key];
     }
 
     static save() {
-        fs.writeFile(this.filename, JSON.stringify(this.objects), (err) => {
+        const dataToSave = {};
+        
+        for (const key in objects) {
+            const inst = objects[key];
+            dataToSave[key] = inst.toDict();
+        }
+    
+        fs.writeFile(fileName, JSON.stringify(dataToSave), (err) => {
             if (err) throw err;
         });
     }
-
-    static reload() {
+    
+    static load() {
         try {
-            this.objects = JSON.parse(fs.readFileSync(this.filename));
+            const data = fs.readFileSync(fileName, 'utf8');
+            const objects = JSON.parse(data);
+            for (const key in objects) {
+
+            }
         } catch (err) {
-            this.objects = {};
+            return;
         }
     }
 }
+module.exports = objStorage;

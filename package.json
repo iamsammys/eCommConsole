@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "math": "^0.0.3",
+    "mathjs": "^12.3.0",
+    "require": "^2.4.20"
+  }
+}

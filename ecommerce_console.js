@@ -37,8 +37,7 @@ function createUser() {
 }
 
 function viewAllUsers() {
-  const allUsers = objStorage.all(user);
-  console.log(allUsers);
+  const allUsers = objStorage.all('user');
   console.log('\nAll Users:');
   for (const key in allUsers) {
     const currentUser = allUsers[key];
@@ -60,7 +59,7 @@ function createProduct() {
 }
 
 function viewAllProducts() {
-  const allProducts = objStorage.all(product);
+  const allProducts = objStorage.all('product');
   console.log('\nAll Products:');
   for (const key in allProducts) {
     const currentProduct = allProducts[key];
@@ -82,7 +81,7 @@ function createCart() {
 }
 
 function viewAllCarts() {
-  const allCarts = objStorage.all(cart);
+  const allCarts = objStorage.all('cart');
   console.log('\nAll Carts:');
   for (const key in allCarts) {
     const currentCart = allCarts[key];
@@ -104,7 +103,7 @@ function createOrder() {
 }
 
 function viewAllOrders() {
-  const allOrders = objStorage.all(order);
+  const allOrders = objStorage.all('order');
   console.log('\nAll Orders:');
   for (const key in allOrders) {
     const currentOrder = allOrders[key];

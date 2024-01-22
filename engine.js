@@ -26,11 +26,13 @@ class objStorage {
         if (obj === undefined) {
             return objects;
         }
+        const newObj = {};
         for (const key in objects) {
             if (objects[key]['__class__'] === obj) {
-                return objects[key];
+                newObj[key] = objects[key];
             }
         }
+        return newObj;
     }
 
     static delete(objId) {

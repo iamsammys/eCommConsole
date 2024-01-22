@@ -2,7 +2,6 @@
 /**
  * implements the base model for the ecomm console
  */
-const objStorage = require('./engine');
 const fs = require('fs');
 
 
@@ -17,9 +16,9 @@ class baseClass {
     }
 
     static generateId() {
-        return baseClass.lastId? ++baseClass.lastId : baseClass.lastId = 1;
+        return baseClass.id ? ++baseClass.id : (baseClass.id = 1);
     }
-    
+
     toJson() {
         const json = {};
         const attrs = Object.getOwnPropertyNames(this);
@@ -35,13 +34,18 @@ class baseClass {
     }
 
     save() {
+        // Import objStorage only when needed to break the circular dependency
+        const objStorage = require('./engine');
         objStorage.new(this);
         objStorage.save();
     }
 
     update() {
         this.updatedAt = new Date();
+        // Import objStorage only when needed to break the circular dependency
+        const objStorage = require('./engine');
         objStorage.save();
     }
 }
+
 module.exports = baseClass;

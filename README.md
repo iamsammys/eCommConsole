@@ -22,7 +22,7 @@ The Ecommerce Console is a simple command-line interface (CLI) for managing user
 3. **Run the Console**: Navigate to the script's directory and run:
 
    ```bash
-   ./ecommerce_console.js
+   node ./ecommerce_console.js
    ```
 
 ===== Ecommerce Console =====

@@ -1,5 +1,5 @@
 #!/usr/bin/node
-
+const objStorage = require('./engine');
 const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,
@@ -11,7 +11,6 @@ const cart = require('./cart');
 const order = require('./order');
 const product = require('./product');
 
-const objStorage = require('./engine');
 
 function displayMenu() {
   console.log('\n===== Ecommerce Console =====');

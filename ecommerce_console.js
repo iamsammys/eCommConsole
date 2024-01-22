@@ -63,7 +63,7 @@ function viewAllProducts() {
   console.log('\nAll Products:');
   for (const key in allProducts) {
     const currentProduct = allProducts[key];
-    console.log(`Product ${currentProduct.id}: ${currentProduct.name} - ${currentProduct.description}`);
+    console.log(`Product ${currentProduct.id}: ${currentProduct.name} - ${currentProduct.category}`);
   }
   displayMenu();
   processUserInput();

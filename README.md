@@ -60,4 +60,4 @@ Enter your choice: 2
 
 delete and update features for each of the models
 
-## Note that u will have to restart the console after making a new instance. This is an issue i will fix in a later update
+## Note that u will have to restart the console after making a new instance. This is an issue i will fix in a later update. And also the files are saved to a json file which is reloaded at the start of te app.

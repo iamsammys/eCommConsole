@@ -15,6 +15,7 @@ class objStorage {
         }
         this.objects = objects;
         this.filename = fileName;
+        objStorage.load();
     }
 
     static new(obj) {
@@ -53,8 +54,19 @@ class objStorage {
         try {
             const data = fs.readFileSync(fileName, 'utf8');
             const objects = JSON.parse(data);
-            for (const key in objects) {
-
+            for (const functions in objects) {
+                for (const key in objects[functions]) {
+                    const obj = objects[functions][key];
+                    const className = obj['__class__'];
+                    const cls = require('./' + className.toLowerCase() + '.js');
+                    const inst = new cls();
+                    for (const attr in obj) {
+                        if (attr !== '__class__') {
+                            inst[attr] = obj[attr];
+                        }
+                    }
+                    objStorage.new(inst);
+                }
             }
         } catch (err) {
             return;
